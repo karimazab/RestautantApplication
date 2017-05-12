@@ -1,0 +1,161 @@
+﻿
+<div class="module">
+    <div class="module-head">
+        <form class="form-horizontal row-fluid" role="form" ng-submit="addRow()">
+
+            <div class="span4">
+
+                <div class="control-group">
+                    <label class="control-label" for="basicinput">Category</label>
+                    <div class="controls">
+                        <select required id="CategoryDrop" ng-change="SelectCategory(Category_Id)" @*onchange="angular.element(this).scope().SelectCategory()"*@ ng-model="Category_Id">
+                            <option value="0" disabled="disabled" selected="selected">Please select a Category...</option>
+                            @foreach (var item in ViewBag.Categories)
+                            {
+                                <option value=@item.Id> @item.Name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="basicinput">Meal</label>
+                    <div class="controls">
+                        <select required tabindex="1" ng-change="CalPrice()" ng-model="Meal_Id">
+                            <option value="0" disabled="disabled" selected="selected" data-placeholder="Please select a Meal" required>Please select a Meal...</option>
+                            <option ng-repeat="x in CurrentMeals" value="{{x.Id}}">{{x.Name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="basicinput">Q</label>
+                    <div class="controls">
+                        <input type="number" value="1" ng-change="CalPrice()" class="form-control" name="Q"
+                               ng-model="Q" required min="1"/>
+                    </div>
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                        <label class="col-md-2 control-label">Q</label>
+                        <div class="col-md-4">
+                            <input type="number" class="form-control" name="Q"
+                                   ng-model="Q" required />
+                        </div>
+                    </div>
+                </div>*@
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label" for="basicinput">IsCombo 3LE</label>
+                    <div class="controls">
+                        <input type="checkbox" ng-change="CalPrice()" class="form-control" name="IsCombo"
+                               ng-model="IsCombo" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="basicinput">IsSpicy 3LE</label>
+                    <div class="controls">
+                        <input type="checkbox" ng-change="CalPrice()" class="form-control" name="IsSpicy"
+                               ng-model="IsSpicy" />
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="controls">
+                        <h3 class="inline pull-left">Total : {{MealPrice}}</h3>  <input type="submit" value="Add Meal" class="btn btn-primary inline pull-right" />
+                    </div>
+                </div>
+                @*<div class="form-group">
+                        <label class="col-md-2 control-label">IsCombo</label>
+                        <div class="col-md-4">
+                            <input type="checkbox" class="form-control" name="IsCombo"
+                                   ng-model="IsCombo" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">IsSpicy</label>
+                        <div class="col-md-4">
+                            <input type="checkbox" class="form-control" name="IsSpicy"
+                                   ng-model="IsSpicy" />
+                        </div>
+                    </div>*@
+                @*<div class="form-group">
+                        <label class="col-md-2 control-label">Meal_Id</label>
+                        <div class="col-md-4">
+                            <input type="number" class="form-control" name="Meal_Id"
+                                   ng-model="Meal_Id" required />
+                        </div>
+                    </div>*@
+                @*<div class="form-group">
+                        <div style="padding-left:110px">
+                            <input type="submit" value="Submit" class="btn btn-primary" />
+                        </div>
+                    </div>*@
+            </div>
+        </form>
+
+    </div>
+
+    <div class="module-body">
+        <div class="form-horizontal row-fluid">
+            <div class="span9">
+
+                <div class="control-group">
+                    <table class="table">
+                        <tr>
+                            <th>
+                                item
+                            </th>
+                            <th>
+                                Q
+                            </th>
+                            <th>
+                                Price
+                            </th>
+                            <th>
+                                AddOns
+                            </th>
+                            <th>
+                                Total
+                            </th>
+                        </tr>
+                        <tr ng-repeat="meal in mealsOutput">
+                            <td>
+                                {{meal.item}}
+                            </td>
+                            <td>
+                                {{meal.Q}}
+                            </td>
+                            <td>
+                                {{meal.Price}}
+                            </td>
+                            <td>
+                                {{meal.AddOns}}
+                            </td>
+                            <td>
+                                {{meal.Total}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="span3">
+                <div class="control-group">
+                    <form class="form-horizontal row-fluid pull-right" role="form" ng-submit="addRow2()">
+                        @*<div class="control-group">
+                            <div class="controls">
+                                <h4 > Total :355 LE</h4>
+                            </div>
+                        </div>*@
+                        <div class="control-group">
+                            <h4 class="control-label" >Total :{{OverAllPrice}} LE</h4>
+                            @*<label class="control-label" for="basicinput">Total :355 LE</label>*@
+                            <div class="controls">
+                               <input type="submit" value="Add Order" class="form-control btn btn-primary" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
